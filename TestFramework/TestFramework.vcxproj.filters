@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\DataGeneration">
+      <UniqueIdentifier>{7e8400a1-03e6-4245-a97a-e57f0795f937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataGeneration">
+      <UniqueIdentifier>{bc249f2b-a3eb-4b44-8567-5404f9088717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataGeneration\Generators">
+      <UniqueIdentifier>{80174e00-f7a0-4069-9a85-9f361700a711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataGeneration\Generators">
+      <UniqueIdentifier>{f9ca4590-f404-47a6-b39d-96c9b470ef0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataGeneration\Generators\Bases">
+      <UniqueIdentifier>{7e4e94bf-5d3a-497a-acd3-2782db7a65e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataGeneration\Generators\Implementations">
+      <UniqueIdentifier>{bfbf8bc5-967d-4099-b731-d897277def01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataGeneration.h">
+      <Filter>Header Files\DataGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Range.h">
+      <Filter>Header Files\DataGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="RangeMinNotLessThanEqualMax.h">
+      <Filter>Header Files\DataGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="StringDataGenerator.h">
+      <Filter>Header Files\DataGeneration\Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="IntegerDataGenerator.h">
+      <Filter>Header Files\DataGeneration\Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatingPointDataGenerator.h">
+      <Filter>Header Files\DataGeneration\Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="DataGeneratorBase.h">
+      <Filter>Header Files\DataGeneration\Generators\Bases</Filter>
+    </ClInclude>
+    <ClInclude Include="NumericDataGeneratorBase.h">
+      <Filter>Header Files\DataGeneration\Generators\Bases</Filter>
+    </ClInclude>
+    <ClInclude Include="DataGenerator.h">
+      <Filter>Header Files\DataGeneration\Generators\Bases</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDataGenerator.h">
+      <Filter>Header Files\DataGeneration\Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDataGeneratorDefinitions.h">
+      <Filter>Header Files\DataGeneration\Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDataGeneratorImplementation.h">
+      <Filter>Header Files\DataGeneration\Generators\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDataGeneratorImplementationDefinitions.h">
+      <Filter>Header Files\DataGeneration\Generators\Implementations</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RangeMinNotLessThanEqualMax.cpp">
+      <Filter>Source Files\DataGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="StringDataGenerator.cpp">
+      <Filter>Source Files\DataGeneration\Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatingPointDataGenerator.cpp">
+      <Filter>Source Files\DataGeneration\Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="IntegerDataGenerator.cpp">
+      <Filter>Source Files\DataGeneration\Generators</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
