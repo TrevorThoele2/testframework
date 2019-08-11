@@ -27,6 +27,7 @@ namespace TestFramework
         Group RandomGroup(GroupCount count, Range range = Range());
     protected:
         using DataGeneratorBase<T>::CreateExclusiveGroup;
+        using DataGeneratorBase<T>::dataGeneration;
     private:
         std::default_random_engine randomEngine;
 
@@ -99,7 +100,7 @@ namespace TestFramework
         float percentCountTakesUpRange = static_cast<float>(static_cast<Value>(count) / distance);
         if (percentCountTakesUpRange > 0.25)
         {
-            NumericDataGeneratorBase<unsigned int> indexGenerator;
+            NumericDataGeneratorBase<unsigned int> indexGenerator(*dataGeneration);
 
             Group selectFrom;
             for (Value i = range.min; i < range.max; ++i)

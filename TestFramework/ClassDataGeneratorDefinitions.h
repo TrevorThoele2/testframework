@@ -12,6 +12,8 @@ namespace TestFramework
     template<class... Args>
     typename ClassDataGenerator<T>::StackValue ClassDataGenerator<T>::RandomStack()
     {
+        static_assert(std::is_constructible_v<T, Args...>, "T is not constructible from Args.");
+
         using Template = ::Chroma::VariadicTemplate<Args...>;
         return Constructor<Template, Template::count>::CreateStack(*dataGeneration);
     }
@@ -20,6 +22,8 @@ namespace TestFramework
     template<class... Args>
     typename ClassDataGenerator<T>::HeapValue ClassDataGenerator<T>::RandomHeap()
     {
+        static_assert(std::is_constructible_v<T, Args...>, "T is not constructible from Args.");
+
         using Template = ::Chroma::VariadicTemplate<Args...>;
         return Constructor<Template, Template::count>::CreateHeap(*dataGeneration);
     }
@@ -28,6 +32,8 @@ namespace TestFramework
     template<class... Args>
     typename ClassDataGenerator<T>::StackGroup ClassDataGenerator<T>::RandomStackGroup(GroupCount count)
     {
+        static_assert(std::is_constructible_v<T, Args...>, "T is not constructible from Args.");
+
         using Template = ::Chroma::VariadicTemplate<Args...>;
         using Data = GroupData<Template>;
 
@@ -45,8 +51,10 @@ namespace TestFramework
 
     template<class T>
     template<class... Args>
-    typename ClassDataGenerator<T>::HeapGroup ClassDataGenerator<T>::RandomHeadGroup(GroupCount count)
+    typename ClassDataGenerator<T>::HeapGroup ClassDataGenerator<T>::RandomHeapGroup(GroupCount count)
     {
+        static_assert(std::is_constructible_v<T, Args...>, "T is not constructible from Args.");
+
         using Template = ::Chroma::VariadicTemplate<Args...>;
         using Data = GroupData<Template>;
 

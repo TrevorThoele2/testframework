@@ -25,7 +25,7 @@ namespace TestFramework
         template<class... Args>
         StackGroup RandomStackGroup(GroupCount count);
         template<class... Args>
-        HeapGroup RandomHeadGroup(GroupCount count);
+        HeapGroup RandomHeapGroup(GroupCount count);
     protected:
         using DataGeneratorBase<T>::dataGeneration;
     private:

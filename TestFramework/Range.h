@@ -7,7 +7,7 @@ namespace TestFramework
     template<class T>
     struct Range
     {
-        typedef T Value;
+        using Value = T;
 
         Value min;
         Value max;

@@ -15,7 +15,7 @@ namespace TestFramework
         template<class T>
         struct ClassDataTemplateTransformer
         {
-            typedef std::vector<T> Type;
+            using Type = std::vector<T>;
         };
         template<class Template>
         using ClassGroupDataLists = typename Template::template Transform<ClassDataTemplateTransformer>::Type::TupleT;
@@ -24,12 +24,12 @@ namespace TestFramework
         class ClassConstructor
         {
         public:
-            typedef T StackValue;
-            typedef T* HeapValue;
+            using StackValue = T;
+            using HeapValue = T*;
 
-            typedef ClassConstructor<T, Template, i - 1> Next;
+            using Next = ClassConstructor<T, Template, i - 1>;
             using GroupData = ClassGroupData<Template>;
-            typedef typename Template::template Parameter<i - 1>::Type CurrentType;
+            using CurrentType = typename Template::template Parameter<i - 1>::Type;
 
             template<class... Args>
             static StackValue CreateStack(DataGeneration& dataGeneration, Args&& ... args);
@@ -45,8 +45,8 @@ namespace TestFramework
         class ClassConstructor<T, Template, 0>
         {
         public:
-            typedef T StackValue;
-            typedef T* HeapValue;
+            using StackValue = T;
+            using HeapValue = T*;
 
             using GroupData = ClassGroupData<Template>;
 
@@ -68,7 +68,7 @@ namespace TestFramework
 
             using Next = ClassGroupDataConstructor<Template, i - 1>;
             using GroupDataLists = ClassGroupDataLists<Template>;
-            typedef typename Template::template Parameter<i - 1>::Type CurrentType;
+            using CurrentType = typename Template::template Parameter<i - 1>::Type;
 
             template<class... Args>
             static GroupDataLists Create(GroupCount count, DataGeneration& dataGeneration, Args&& ... args);
