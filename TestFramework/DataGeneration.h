@@ -14,8 +14,8 @@ namespace TestFramework
     class DataGeneration
     {
     public:
-        template<class T>
-        auto Random();
+        template<class T, class... Args>
+        auto Random(Args&& ... args);
         template<class T, class... Args>
         auto RandomStack();
         template<class T, class... Args>
@@ -44,10 +44,10 @@ namespace TestFramework
         std::type_index GeneratorKey();
     };
 
-    template<class T>
-    auto DataGeneration::Random()
+    template<class T, class... Args>
+    auto DataGeneration::Random(Args&& ... args)
     {
-        return Generator<T>().Random();
+        return Generator<T>().Random(std::forward<Args>(args)...);
     }
 
     template<class T, class... Args>
