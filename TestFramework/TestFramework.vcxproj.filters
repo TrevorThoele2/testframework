@@ -68,6 +68,9 @@
     <ClInclude Include="ClassDataGeneratorImplementationDefinitions.h">
       <Filter>Header Files\DataGeneration\Generators\Implementations</Filter>
     </ClInclude>
+    <ClInclude Include="GroupCount.h">
+      <Filter>Header Files\DataGeneration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RangeMinNotLessThanEqualMax.cpp">

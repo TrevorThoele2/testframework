@@ -13,7 +13,6 @@ namespace TestFramework
         using StackGroup = std::vector<StackValue>;
         using HeapValue = StackValue*;
         using HeapGroup = std::vector<HeapValue>;
-        using GroupCount = typename DataGeneratorBase<T>::GroupCount;
     public:
         ClassDataGenerator(DataGeneration& dataGeneration);
 

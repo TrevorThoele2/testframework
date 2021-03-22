@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GroupCount.h"
+
 namespace TestFramework
 {
     class DataGeneration;
@@ -9,7 +11,6 @@ namespace TestFramework
     {
     public:
         using Value = T;
-        using GroupCount = size_t;
     protected:
         DataGeneration* const dataGeneration;
     protected:
@@ -37,9 +38,7 @@ namespace TestFramework
             auto generated = creator();
 
             auto found = std::find(returnValue.begin(), returnValue.end(), generated);
-            if (found != returnValue.end())
-                continue;
-            else
+            if (found == returnValue.end())
             {
                 returnValue.push_back(generated);
                 ++i;
