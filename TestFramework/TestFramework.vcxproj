@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoolDataGenerator.h" />
     <ClInclude Include="ClassDataGenerator.h" />
     <ClInclude Include="ClassDataGeneratorDefinitions.h" />
     <ClInclude Include="ClassDataGeneratorImplementation.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="StringDataGenerator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoolDataGenerator.cpp" />
     <ClCompile Include="FloatingPointDataGenerator.cpp" />
     <ClCompile Include="IntegerDataGenerator.cpp" />
     <ClCompile Include="RangeMinNotLessThanEqualMax.cpp" />
