@@ -21,12 +21,11 @@ namespace TestFramework
         if (count == 0)
             return returnValue;
         
-        Distribution distribution = {};
-        auto creator = [this, &distribution]()
-        {
-            return distribution(randomEngine);
-        };
+        const Distribution distribution = {};
 
-        return this->CreateExclusiveGroup<Value>(count, creator);
+        Group group;
+        for (GroupCount i = 0; i < count; ++i)
+            group.push_back(distribution(randomEngine));
+        return group;
     }
 }
