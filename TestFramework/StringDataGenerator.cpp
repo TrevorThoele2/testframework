@@ -16,12 +16,12 @@ namespace TestFramework
         std::string returnValue;
 
         std::string selectFrom = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZ";
-        std::uniform_int_distribution<unsigned int> distribution(0, selectFrom.size() - 1);
+        const std::uniform_int_distribution<unsigned int> distribution(0, selectFrom.size() - 1);
 
         for (unsigned int i = 0; i < size; ++i)
         {
-            auto selectFromIndex = distribution(randomEngine);
-            auto selected = selectFrom[selectFromIndex];
+            const auto selectFromIndex = distribution(randomEngine);
+            const auto selected = selectFrom[selectFromIndex];
             returnValue += selected;
         }
 
