@@ -71,6 +71,9 @@
     <ClInclude Include="GroupCount.h">
       <Filter>Header Files\DataGeneration</Filter>
     </ClInclude>
+    <ClInclude Include="BoolDataGenerator.h">
+      <Filter>Header Files\DataGeneration\Generators</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RangeMinNotLessThanEqualMax.cpp">
@@ -83,6 +86,9 @@
       <Filter>Source Files\DataGeneration\Generators</Filter>
     </ClCompile>
     <ClCompile Include="IntegerDataGenerator.cpp">
+      <Filter>Source Files\DataGeneration\Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="BoolDataGenerator.cpp">
       <Filter>Source Files\DataGeneration\Generators</Filter>
     </ClCompile>
   </ItemGroup>

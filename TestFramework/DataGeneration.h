@@ -4,6 +4,7 @@
 #include <typeindex>
 #include <any>
 
+#include "BoolDataGenerator.h"
 #include "IntegerDataGenerator.h"
 #include "FloatingPointDataGenerator.h"
 #include "StringDataGenerator.h"
