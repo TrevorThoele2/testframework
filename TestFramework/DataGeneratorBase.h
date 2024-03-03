@@ -8,7 +8,7 @@ namespace TestFramework
     class DataGeneratorBase
     {
     public:
-        typedef T Value;
+        using Value = T;
         using GroupCount = size_t;
     protected:
         DataGeneration* const dataGeneration;
