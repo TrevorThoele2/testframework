@@ -2,18 +2,30 @@
 
 #include <unordered_map>
 #include <typeindex>
+#include <any>
 
 #include "IntegerDataGenerator.h"
 #include "FloatingPointDataGenerator.h"
 #include "StringDataGenerator.h"
 #include "ClassDataGenerator.h"
 
-#include <Chroma/Any.h>
-
 namespace TestFramework
 {
     class DataGeneration
     {
+    public:
+        template<class T>
+        auto Random();
+        template<class T, class... Args>
+        auto RandomStack();
+        template<class T, class... Args>
+        auto RandomHeap();
+        template<class T, class... Args>
+        auto RandomGroup(Args&& ... args);
+        template<class T, class... Args>
+        auto RandomStackGroup(GroupCount count);
+        template<class T, class... Args>
+        auto RandomHeapGroup(GroupCount count);
     public:
         template<class T, std::enable_if_t<!std::is_class_v<T>, int> = 0>
         DataGenerator<T>& Generator();
@@ -22,7 +34,7 @@ namespace TestFramework
         template<class T, std::enable_if_t<std::is_class_v<T> && !std::is_same_v<std::string, T>, int> = 0>
         ClassDataGenerator<T>& Generator();
     private:
-        using GeneratorMap = std::unordered_map<std::type_index, ::Chroma::Any>;
+        using GeneratorMap = std::unordered_map<std::type_index, std::any>;
         GeneratorMap generatorMap;
 
         template<class T>
@@ -31,6 +43,42 @@ namespace TestFramework
         template<class T>
         std::type_index GeneratorKey();
     };
+
+    template<class T>
+    auto DataGeneration::Random()
+    {
+        return Generator<T>().Random();
+    }
+
+    template<class T, class... Args>
+    auto DataGeneration::RandomStack()
+    {
+        return Generator<T>().template RandomStack<Args...>();
+    }
+
+    template<class T, class... Args>
+    auto DataGeneration::RandomHeap()
+    {
+        return Generator<T>().template RandomHeap<Args...>();
+    }
+
+    template<class T, class... Args>
+    auto DataGeneration::RandomGroup(Args&& ... args)
+    {
+        return Generator<T>().RandomGroup(std::forward<Args>(args)...);
+    }
+
+    template<class T, class... Args>
+    auto DataGeneration::RandomStackGroup(GroupCount count)
+    {
+        return Generator<T>().template RandomStackGroup<Args...>(count);
+    }
+
+    template<class T, class... Args>
+    auto DataGeneration::RandomHeapGroup(GroupCount count)
+    {
+        return Generator<T>().template RandomHeapGroup<Args...>(count);
+    }
 
     template<class T, std::enable_if_t<!std::is_class_v<T>, int>>
     DataGenerator<T>& DataGeneration::Generator()
@@ -50,9 +98,9 @@ namespace TestFramework
         auto key = GeneratorKey<T>();
         auto focusedGenerator = generatorMap.find(key);
         if (focusedGenerator == generatorMap.end())
-            focusedGenerator = generatorMap.emplace(key, ::Chroma::Any(ClassDataGenerator<T>(*this))).first;
+            focusedGenerator = generatorMap.emplace(key, std::any{ ClassDataGenerator<T>(*this) }).first;
 
-        return focusedGenerator->second.As<ClassDataGenerator<T>>();
+        return std::any_cast<ClassDataGenerator<T>&>(focusedGenerator->second);
     }
 
     template<class T>
@@ -61,9 +109,9 @@ namespace TestFramework
         auto key = GeneratorKey<T>();
         auto focusedGenerator = generatorMap.find(key);
         if (focusedGenerator == generatorMap.end())
-            focusedGenerator = generatorMap.emplace(key, ::Chroma::Any(DataGenerator<T>(*this))).first;
+            focusedGenerator = generatorMap.emplace(key, std::any{ DataGenerator<T>(*this) }).first;
 
-        return focusedGenerator->second.As<DataGenerator<T>>();
+        return std::any_cast<DataGenerator<T>&>(focusedGenerator->second);
     }
 
     template<class T>

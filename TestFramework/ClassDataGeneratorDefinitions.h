@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ClassDataGenerator.h"
+#include <Chroma/IsBracesConstructible.h>
 
 namespace TestFramework
 {
@@ -12,9 +13,9 @@ namespace TestFramework
     template<class... Args>
     typename ClassDataGenerator<T>::StackValue ClassDataGenerator<T>::RandomStack()
     {
-        static_assert(std::is_constructible_v<T, Args...>, "T is not constructible from Args.");
+        static_assert(Chroma::is_braces_constructible_v<T, Args...>, "T is not constructible from Args.");
 
-        using Template = ::Chroma::VariadicTemplate<Args...>;
+        using Template = Chroma::VariadicTemplate<Args...>;
         return Constructor<Template, Template::count>::CreateStack(*dataGeneration);
     }
 
@@ -22,9 +23,9 @@ namespace TestFramework
     template<class... Args>
     typename ClassDataGenerator<T>::HeapValue ClassDataGenerator<T>::RandomHeap()
     {
-        static_assert(std::is_constructible_v<T, Args...>, "T is not constructible from Args.");
+        static_assert(Chroma::is_braces_constructible_v<T, Args...>, "T is not constructible from Args.");
 
-        using Template = ::Chroma::VariadicTemplate<Args...>;
+        using Template = Chroma::VariadicTemplate<Args...>;
         return Constructor<Template, Template::count>::CreateHeap(*dataGeneration);
     }
 
@@ -32,9 +33,9 @@ namespace TestFramework
     template<class... Args>
     typename ClassDataGenerator<T>::StackGroup ClassDataGenerator<T>::RandomStackGroup(GroupCount count)
     {
-        static_assert(std::is_constructible_v<T, Args...>, "T is not constructible from Args.");
+        static_assert(Chroma::is_braces_constructible_v<T, Args...>, "T is not constructible from Args.");
 
-        using Template = ::Chroma::VariadicTemplate<Args...>;
+        using Template = Chroma::VariadicTemplate<Args...>;
         using Data = GroupData<Template>;
 
         auto dataLists = GroupDataConstructor<Template, Template::count>::Create(count, *dataGeneration);
@@ -53,9 +54,9 @@ namespace TestFramework
     template<class... Args>
     typename ClassDataGenerator<T>::HeapGroup ClassDataGenerator<T>::RandomHeapGroup(GroupCount count)
     {
-        static_assert(std::is_constructible_v<T, Args...>, "T is not constructible from Args.");
+        static_assert(Chroma::is_braces_constructible_v<T, Args...>, "T is not constructible from Args.");
 
-        using Template = ::Chroma::VariadicTemplate<Args...>;
+        using Template = Chroma::VariadicTemplate<Args...>;
         using Data = GroupData<Template>;
 
         auto dataLists = GroupDataConstructor<Template, Template::count>::Create(count, *dataGeneration);

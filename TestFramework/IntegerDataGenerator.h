@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DataGenerator.h"
 #include "NumericDataGeneratorBase.h"
 
 namespace TestFramework

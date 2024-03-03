@@ -4,37 +4,18 @@
 #include <random>
 #include <ctime>
 
-#include "DataGenerator.h"
 #include "DataGeneratorBase.h"
 #include "Range.h"
 #include "RangeMinNotLessThanEqualMax.h"
 
 namespace TestFramework
 {
-    template<class T>
-    class NumericDataGeneratorBase : public DataGeneratorBase<T>
+    namespace Detail
     {
-    public:
-        using Value = typename DataGeneratorBase<T>::Value;
-        using Group = std::vector<Value>;
-        using GroupCount = typename DataGeneratorBase<T>::GroupCount;
-    public:
-        using Range = Range<Value>;
-    public:
-        NumericDataGeneratorBase(DataGeneration& dataGeneration);
-
-        Value Random(Range range = Range());
-        Group RandomGroup(GroupCount count, Range range = Range());
-    protected:
-        using DataGeneratorBase<T>::CreateExclusiveGroup;
-        using DataGeneratorBase<T>::dataGeneration;
-    private:
-        std::default_random_engine randomEngine;
-
-        template<class U>
+        template<class T>
         struct DistributionResolver
         {
-            using Distribution = std::uniform_int_distribution<U>;
+            using Distribution = std::uniform_int_distribution<T>;
         };
 
         template<>
@@ -60,8 +41,28 @@ namespace TestFramework
         {
             using Distribution = std::uniform_real_distribution<double>;
         };
+    }
 
-        using Distribution = typename DistributionResolver<T>::Distribution;
+    template<class T>
+    class NumericDataGeneratorBase : public DataGeneratorBase<T>
+    {
+    public:
+        using Value = typename DataGeneratorBase<T>::Value;
+        using Group = std::vector<Value>;
+    public:
+        using Range = Range<Value>;
+    public:
+        NumericDataGeneratorBase(DataGeneration& dataGeneration);
+
+        Value Random(Range range = Range());
+        Group RandomGroup(GroupCount count, Range range = Range());
+    protected:
+        using DataGeneratorBase<T>::CreateExclusiveGroup;
+        using DataGeneratorBase<T>::dataGeneration;
+    private:
+        std::default_random_engine randomEngine;
+
+        using Distribution = typename Detail::DistributionResolver<T>::Distribution;
         Distribution ToDistribution(const Range& range);
     private:
         void ThrowIfRangeInvalid(const Range& range) const;
@@ -97,7 +98,7 @@ namespace TestFramework
             return returnValue;
 
         auto distance = range.Distance();
-        float percentCountTakesUpRange = static_cast<float>(static_cast<Value>(count) / distance);
+        const auto percentCountTakesUpRange = static_cast<float>(static_cast<Value>(count) / distance);
         if (percentCountTakesUpRange > 0.25)
         {
             NumericDataGeneratorBase<unsigned int> indexGenerator(*dataGeneration);
@@ -108,8 +109,8 @@ namespace TestFramework
 
             for (size_t i = 0; i < count; ++i)
             {
-                ::TestFramework::Range<unsigned int> range(0, selectFrom.size() - 1);
-                auto selectFromIndex = indexGenerator.Random(range);
+                const TestFramework::Range<unsigned int> createdRange(0, selectFrom.size() - 1);
+                auto selectFromIndex = indexGenerator.Random(createdRange);
                 auto selected = selectFrom[selectFromIndex];
                 returnValue.push_back(selected);
             }
@@ -122,7 +123,7 @@ namespace TestFramework
                 return distribution(randomEngine);
             };
 
-            returnValue = CreateExclusiveGroup<Value>(count, creator);
+            returnValue = this->template CreateExclusiveGroup<Value>(count, creator);
         }
 
         return returnValue;

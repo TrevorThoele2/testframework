@@ -51,7 +51,7 @@ namespace TestFramework
         typename ClassConstructor<T, Template, 0>::StackValue ClassConstructor<T, Template, 0>::CreateStack(
             DataGeneration& dataGeneration, Args&& ... args)
         {
-            return T(std::forward<Args>(args)...);
+            return T{ std::forward<Args>(args)... };
         }
 
         template<class T, class Template>
@@ -59,7 +59,7 @@ namespace TestFramework
         typename ClassConstructor<T, Template, 0>::StackValue ClassConstructor<T, Template, 0>::CreateStackFrom(
             GroupData& data, DataGeneration& dataGeneration, Args&& ... args)
         {
-            return T(std::forward<Args>(args)...);
+            return T{ std::forward<Args>(args)... };
         }
 
         template<class T, class Template>
@@ -67,7 +67,7 @@ namespace TestFramework
         typename ClassConstructor<T, Template, 0>::HeapValue ClassConstructor<T, Template, 0>::CreateHeap(
             DataGeneration& dataGeneration, Args&& ... args)
         {
-            return new T(std::forward<Args>(args)...);
+            return new T{ std::forward<Args>(args)... };
         }
 
         template<class T, class Template>
@@ -75,7 +75,7 @@ namespace TestFramework
         typename ClassConstructor<T, Template, 0>::HeapValue ClassConstructor<T, Template, 0>::CreateHeapFrom(
             GroupData& data, DataGeneration& dataGeneration, Args&& ... args)
         {
-            return new T(std::forward<Args>(args)...);
+            return new T{ std::forward<Args>(args)... };
         }
 
         template<class Template, ::Chroma::VariadicTemplateSize i>
